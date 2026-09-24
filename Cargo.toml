@@ -1,0 +1,10 @@
+[package]
+name = "toth"
+version = "0.0.1"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.6.7", features = ["derive"] }
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.1.6"
