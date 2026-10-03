@@ -10,6 +10,7 @@ e este projeto segue o versionamento semântico ([SemVer]).
 ### Adicionado
 
 - Início do projeto com estrutura básica de CLI.
+- Mostrar título do livro a partir do arquivo `book.toml`.
 
 [Keep a Changelog]: https://keepachangelog.com/pt-BR/0.3.0/
 [SemVer]: https://semver.org/spec/v2.0.0.html

@@ -10,6 +10,7 @@ and this project adheres to Semantic Versioning ([SemVer]).
 ### Added
 
 - Bootstrap project with basic CLI structure.
+- Read `book.toml` file and show book title.
 
 [Keep a Changelog]: https://keepachangelog.com/en/0.3.0/
 [SemVer]: https://semver.org/spec/v2.0.0.html

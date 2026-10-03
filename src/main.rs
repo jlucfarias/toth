@@ -1,5 +1,11 @@
 use clap::Parser;
-use std::path::PathBuf;
+use serde::Deserialize;
+use std::{
+  error::Error,
+  fs,
+  path::PathBuf,
+  process::ExitCode
+};
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -8,8 +14,36 @@ struct Args {
   book_path: PathBuf,
 }
 
-fn main() {
+#[derive(Debug, Deserialize)]
+struct Book {
+  title: String,
+}
+
+fn read_book_settings(path: &PathBuf) -> Result<Book, Box<dyn Error>> {
+  let final_path = path.join("book.toml");
+  let content = fs::read_to_string(final_path)?;
+  let config = toml::from_str(&content)?;
+
+  Ok(config)
+}
+
+fn main() -> ExitCode {
   let args = Args::parse();
 
-  println!("Book path: {}", &args.book_path.display());
+  match run(&args) {
+    Ok(()) => ExitCode::SUCCESS,
+    Err(err) => {
+      eprintln!("Error: {:?}", err);
+
+      ExitCode::FAILURE
+    }
+  }
+}
+
+fn run(args: &Args) -> Result<(), Box<dyn Error>> {
+  let settings = read_book_settings(&args.book_path)?;
+
+  println!("Book title: {}", settings.title);
+
+  Ok(())
 }
