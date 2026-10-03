@@ -7,6 +7,8 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 ## [Não lançado]
 
+## [0.0.1] - 2026-10-03
+
 ### Adicionado
 
 - Início do projeto com estrutura básica de CLI.
@@ -14,3 +16,4 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 [Keep a Changelog]: https://keepachangelog.com/pt-BR/0.3.0/
 [SemVer]: https://semver.org/spec/v2.0.0.html
+[0.0.1]: https://github.com/jlucfarias/toth/releases/tag/v0.0.1

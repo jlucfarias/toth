@@ -7,6 +7,8 @@ and this project adheres to Semantic Versioning ([SemVer]).
 
 ## [Unreleased]
 
+## [0.0.1] - 2026-10-03
+
 ### Added
 
 - Bootstrap project with basic CLI structure.
@@ -14,3 +16,4 @@ and this project adheres to Semantic Versioning ([SemVer]).
 
 [Keep a Changelog]: https://keepachangelog.com/en/0.3.0/
 [SemVer]: https://semver.org/spec/v2.0.0.html
+[0.0.1]: https://github.com/jlucfarias/toth/releases/tag/v0.0.1
