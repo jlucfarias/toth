@@ -7,6 +7,10 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 ## [Não lançado]
 
+### Alterado
+
+- Dividir em dois pacotes: core e cli
+
 ## [0.0.1] - 2026-10-03
 
 ### Adicionado

@@ -1,5 +1,4 @@
 use clap::Parser;
-use serde::Deserialize;
 use std::{
   error::Error,
   fs,
@@ -7,24 +6,15 @@ use std::{
   process::ExitCode
 };
 
+use toth_core::Book;
+
+const CONFIG_FILE: &str = "book.toml";
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
   #[arg(short, long)]
   book_path: PathBuf,
-}
-
-#[derive(Debug, Deserialize)]
-struct Book {
-  title: String,
-}
-
-fn read_book_settings(path: &PathBuf) -> Result<Book, Box<dyn Error>> {
-  let final_path = path.join("book.toml");
-  let content = fs::read_to_string(final_path)?;
-  let config = toml::from_str(&content)?;
-
-  Ok(config)
 }
 
 fn main() -> ExitCode {
@@ -41,9 +31,11 @@ fn main() -> ExitCode {
 }
 
 fn run(args: &Args) -> Result<(), Box<dyn Error>> {
-  let settings = read_book_settings(&args.book_path)?;
+  let toml_path = args.book_path.join(CONFIG_FILE);
+  let toml_content = fs::read_to_string(&toml_path)?;
+  let book = Book::new(&toml_content)?;
 
-  println!("Book title: {}", settings.title);
+  println!("Book title: {}", book.title());
 
   Ok(())
 }
