@@ -7,9 +7,13 @@ and this project adheres to Semantic Versioning ([SemVer]).
 
 ## [Unreleased]
 
+### Added
+
+- New flag for format with `epub` as default value.
+
 ### Changed
 
-- Split into two crates: core and cli
+- Split into two crates: core and cli.
 
 ## [0.0.1] - 2026-10-03
 

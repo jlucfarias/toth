@@ -7,9 +7,13 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 ## [Não lançado]
 
+### Adicionado
+
+- Novo parâmetro de formato com `epub` como valor padrão.
+
 ### Alterado
 
-- Dividir em dois pacotes: core e cli
+- Dividir em dois pacotes: core e cli.
 
 ## [0.0.1] - 2026-10-03
 
