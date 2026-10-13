@@ -10,6 +10,7 @@ e este projeto segue o versionamento semântico ([SemVer]).
 ### Adicionado
 
 - Novo parâmetro de formato com `epub` como valor padrão.
+- Novo parâmetro de caminho de saída usando o parâmetro `book_path` como valor padrão.
 
 ### Alterado
 

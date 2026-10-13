@@ -10,6 +10,7 @@ and this project adheres to Semantic Versioning ([SemVer]).
 ### Added
 
 - New flag for format with `epub` as default value.
+- New flag for output path using `book_path` flag as default value.
 
 ### Changed
 

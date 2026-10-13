@@ -27,6 +27,9 @@ struct Args {
 
   #[arg(short, long, value_enum, default_value_t = FileFormat::Epub)]
   format: FileFormat,
+
+  #[arg(short, long)]
+  output_path: Option<PathBuf>,
 }
 
 const CONFIG_FILE: &str = "book.toml";
@@ -51,8 +54,11 @@ fn run(args: &Args) -> Result<(), Box<dyn Error>> {
   let format = match args.format {
     FileFormat::Epub => ExportFormat::Epub,
   };
+  let output_dir = args.output_path.as_deref().unwrap_or(args.book_path.as_path());
+  let file_name = format!("{}.{}", book.title(), format.extension());
+  let final_path = output_dir.join(&file_name);
 
-  println!("Book title: {}, Export to: {format}", book.title());
+  println!("Book title: {}, Export to: {format} at {}", book.title(), final_path.display());
 
   Ok(())
 }
