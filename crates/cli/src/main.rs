@@ -57,8 +57,10 @@ fn run(args: &Args) -> Result<(), Box<dyn Error>> {
   let output_dir = args.output_path.as_deref().unwrap_or(args.book_path.as_path());
   let file_name = format!("{}.{}", book.title(), format.extension());
   let final_path = output_dir.join(&file_name);
+  let file_content = book.export(format)?;
 
-  println!("Book title: {}, Export to: {format} at {}", book.title(), final_path.display());
+  fs::write(&final_path, file_content)?;
+  println!("{file_name} generated successfully at {}", final_path.display());
 
   Ok(())
 }

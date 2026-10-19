@@ -7,6 +7,10 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 ## [Não lançado]
 
+### Adicionado
+
+- Exportando livro como epub e criando arquivo no sistema de arquivos.
+
 ## [0.1.0] - 2026-10-16
 
 ### Adicionado

@@ -5,5 +5,9 @@ edition.workspace = true
 authors.workspace = true
 
 [dependencies]
+# Common
 serde = { version = "1.0.229", features = ["derive"] }
 toml = "1.1.6"
+
+# Epub export
+epub-builder = "0.8.3"

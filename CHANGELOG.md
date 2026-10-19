@@ -7,6 +7,10 @@ and this project adheres to Semantic Versioning ([SemVer]).
 
 ## [Unreleased]
 
+### Added
+
+- Export book as epub and create file on filesystem.
+
 ## [0.1.0] - 2026-10-16
 
 ### Added
