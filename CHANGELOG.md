@@ -10,6 +10,7 @@ and this project adheres to Semantic Versioning ([SemVer]).
 ### Added
 
 - Export book as epub and create file on filesystem.
+- Import metadata from `.toml` file to epub
 
 ## [0.1.0] - 2026-10-16
 
