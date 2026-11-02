@@ -2,7 +2,13 @@ use chrono::{
   DateTime,
   Utc,
 };
-use std::error::Error;
+use std::{
+  error::Error,
+  path::{
+    Path,
+    PathBuf,
+  }
+};
 use serde::Deserialize;
 
 use crate::{
@@ -26,11 +32,15 @@ pub struct Book {
   language: Vec<String>,
   #[serde(default, deserialize_with = "date_or_datetime")]
   publish_date: Option<DateTime<Utc>>,
+  #[serde(skip)]
+  root_path: PathBuf,
+  cover_path: PathBuf,
 }
 
 impl Book {
-  pub fn new(toml_content: &str) -> Result<Self, Box<dyn Error>> {
-    let book: Book = toml::from_str(toml_content)?;
+  pub fn new(toml_content: &str, path: &Path) -> Result<Self, Box<dyn Error>> {
+    let mut book: Book = toml::from_str(toml_content)?;
+    book.root_path = path.to_path_buf();
 
     Ok(book)
   }
@@ -57,6 +67,14 @@ impl Book {
 
   pub fn publish_date(&self) -> Option<DateTime<Utc>> {
     self.publish_date
+  }
+
+  pub fn root_path(&self) -> &Path {
+    &self.root_path
+  }
+
+  pub fn cover_path(&self) -> &Path {
+    &self.cover_path
   }
 
   pub fn export(&self, format: ExportFormat) -> Result<Vec<u8>, Box<dyn Error>> {

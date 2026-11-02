@@ -50,7 +50,7 @@ fn main() -> ExitCode {
 fn run(args: &Args) -> Result<(), Box<dyn Error>> {
   let toml_path = args.book_path.join(CONFIG_FILE);
   let toml_content = fs::read_to_string(&toml_path)?;
-  let book = Book::new(&toml_content)?;
+  let book = Book::new(&toml_content, &args.book_path)?;
   let format = match args.format {
     FileFormat::Epub => ExportFormat::Epub,
   };

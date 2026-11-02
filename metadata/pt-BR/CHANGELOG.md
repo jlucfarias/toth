@@ -10,7 +10,8 @@ e este projeto segue o versionamento semântico ([SemVer]).
 ### Adicionado
 
 - Exportando livro como epub e criando arquivo no sistema de arquivos.
-- Importando metadados do arquivo `.toml` para o epub
+- Importando metadados do arquivo `.toml` para o epub.
+- Importando imagem de capa do arquivo `.toml` para o epub.
 
 ## [0.1.0] - 2026-10-16
 

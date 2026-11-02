@@ -3,7 +3,10 @@ use epub_builder::{
   EpubVersion,
   ZipLibrary
 };
-use std::error::Error;
+use std::{
+  error::Error,
+  fs
+};
 
 use crate::Book;
 
@@ -43,11 +46,26 @@ impl Epub {
     Ok(())
   }
 
+  fn add_cover(builder: &mut EpubBuilder<ZipLibrary>, book: &Book) -> Result<(), Box<dyn Error>> {
+    let cover_path = book.root_path().join(book.cover_path());
+    let cover_content = fs::read(cover_path)?;
+    let kind = infer::get(&cover_content).ok_or("Test")?;
+    let mime = match kind.mime_type() {
+      mime @ ("image/png" | "image/jpeg" | "image/gif") => mime,
+      other => return Err(format!("Unsupported cover format: {other}").into()),
+    };
+
+    builder.add_cover_image(format!("images/cover.{}", kind.extension()), cover_content.as_slice(), mime)?;
+
+    Ok(())
+  }
+
   pub(crate) fn generate(&self, book: &Book) -> Result<Vec<u8>, Box<dyn Error>> {
     let mut builder = EpubBuilder::new(ZipLibrary::new()?)?;
     builder.epub_version(EpubVersion::V30);
 
     Self::add_metadata(&mut builder, book)?;
+    Self::add_cover(&mut builder, book)?;
 
     let mut buffer = Vec::new();
     builder.generate(&mut buffer)?;
