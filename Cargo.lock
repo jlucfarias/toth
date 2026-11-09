@@ -219,7 +219,7 @@ dependencies = [
  "once_cell",
  "tempfile",
  "thiserror",
- "upon",
+ "upon 0.10.0",
  "uuid",
  "zip",
 ]
@@ -679,6 +679,7 @@ dependencies = [
  "infer",
  "serde",
  "toml",
+ "upon 0.11.0",
 ]
 
 [[package]]
@@ -698,6 +699,17 @@ name = "upon"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f3ead40aa15464f4d808014183fa0b030761ff6f57e162f7fc76d6a900df7a28"
+dependencies = [
+ "serde",
+ "unicode-ident",
+ "unicode-width",
+]
+
+[[package]]
+name = "upon"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b9c46fa694fd01d98377a882557a909f14258a0b2d453eb311cb471e32728ba8"
 dependencies = [
  "serde",
  "unicode-ident",

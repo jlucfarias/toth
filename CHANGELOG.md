@@ -12,6 +12,7 @@ and this project adheres to Semantic Versioning ([SemVer]).
 - Export book as epub and create file on filesystem.
 - Import metadata from `.toml` file to epub.
 - Import cover image from `.toml` file to epub.
+- Creating title page using template file.
 
 ## [0.1.0] - 2026-10-16
 
