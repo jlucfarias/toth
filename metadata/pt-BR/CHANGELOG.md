@@ -13,6 +13,7 @@ e este projeto segue o versionamento semântico ([SemVer]).
 - Importando metadados do arquivo `.toml` para o epub.
 - Importando imagem de capa do arquivo `.toml` para o epub.
 - Criando página de título utilizando arquivo de modelo.
+- Permitir ignorar criação da página de título na exportação de epub.
 
 ## [0.1.0] - 2026-10-16
 

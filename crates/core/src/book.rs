@@ -20,6 +20,23 @@ use crate::{
   }
 };
 
+#[derive(Copy, Clone, Debug, Deserialize, Default)]
+pub struct EpubConfig {
+  ignore_titlepage: bool,
+}
+
+impl EpubConfig {
+  pub fn new() -> Self {
+    Self {
+      ignore_titlepage: false,
+    }
+  }
+
+  pub fn ignore_titlepage(&self) -> &bool {
+    &self.ignore_titlepage
+  }
+}
+
 #[derive(Debug, Deserialize)]
 pub struct Book {
   title: String,
@@ -32,6 +49,10 @@ pub struct Book {
   language: Vec<String>,
   #[serde(default, deserialize_with = "date_or_datetime")]
   publish_date: Option<DateTime<Utc>>,
+
+  #[serde(default)]
+  epub_configs: Option<EpubConfig>,
+
   #[serde(skip)]
   root_path: PathBuf,
   cover_path: PathBuf,
@@ -75,6 +96,10 @@ impl Book {
 
   pub fn cover_path(&self) -> &Path {
     &self.cover_path
+  }
+
+  pub fn epub_configs(&self) -> Option<EpubConfig> {
+    self.epub_configs
   }
 
   pub fn export(&self, format: ExportFormat) -> Result<Vec<u8>, Box<dyn Error>> {

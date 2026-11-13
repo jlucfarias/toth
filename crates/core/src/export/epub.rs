@@ -11,7 +11,10 @@ use std::{
   fs,
 };
 
-use crate::Book;
+use crate::{
+  Book,
+  EpubConfig,
+};
 
 pub(crate) struct Epub {
 }
@@ -66,20 +69,24 @@ impl Epub {
   fn add_content(builder: &mut EpubBuilder<ZipLibrary>, book: &Book) -> Result<(), Box<dyn Error>> {
     let mut engine = Engine::new();
 
-    engine.add_template("titlepage", include_str!("../../templates/pages/titlepage.xhtml"))?;
+    let epub_configs = book.epub_configs().unwrap_or_else(|| EpubConfig::new());
 
-    let titlepage_context = upon::value! {
-      lang: book.language().first(),
-      titlepage_name: "Titlepage",
-      title: book.title(),
-    };
-    let result = engine.template("titlepage").render(&titlepage_context).to_string()?;
+    if !epub_configs.ignore_titlepage() {
+      engine.add_template("titlepage", include_str!("../../templates/pages/titlepage.xhtml"))?;
 
-    builder.add_content(
-      EpubContent::new("text/titlepage.xhtml", result.as_bytes())
-        .title("Titlepage")
-        .reftype(ReferenceType::TitlePage)
-    )?;
+      let titlepage_context = upon::value! {
+        lang: book.language().first(),
+        titlepage_name: "Titlepage",
+        title: book.title(),
+      };
+      let result = engine.template("titlepage").render(&titlepage_context).to_string()?;
+
+      builder.add_content(
+        EpubContent::new("text/titlepage.xhtml", result.as_bytes())
+          .title("Titlepage")
+          .reftype(ReferenceType::TitlePage)
+      )?;
+    }
 
     Ok(())
   }
