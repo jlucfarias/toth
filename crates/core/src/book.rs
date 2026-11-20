@@ -20,20 +20,24 @@ use crate::{
   }
 };
 
-#[derive(Copy, Clone, Debug, Deserialize, Default)]
+#[derive(Debug, Deserialize, Default)]
+#[serde(default)]
 pub struct EpubConfig {
   ignore_titlepage: bool,
+  titlepage_template: Option<PathBuf>,
 }
 
 impl EpubConfig {
   pub fn new() -> Self {
-    Self {
-      ignore_titlepage: false,
-    }
+    Self::default()
   }
 
-  pub fn ignore_titlepage(&self) -> &bool {
-    &self.ignore_titlepage
+  pub fn ignore_titlepage(&self) -> bool {
+    self.ignore_titlepage
+  }
+
+  pub fn titlepage_template(&self) -> Option<&Path> {
+    self.titlepage_template.as_deref()
   }
 }
 
@@ -51,7 +55,7 @@ pub struct Book {
   publish_date: Option<DateTime<Utc>>,
 
   #[serde(default)]
-  epub_configs: Option<EpubConfig>,
+  epub: EpubConfig,
 
   #[serde(skip)]
   root_path: PathBuf,
@@ -98,8 +102,8 @@ impl Book {
     &self.cover_path
   }
 
-  pub fn epub_configs(&self) -> Option<EpubConfig> {
-    self.epub_configs
+  pub fn epub_configs(&self) -> &EpubConfig {
+    &self.epub
   }
 
   pub fn export(&self, format: ExportFormat) -> Result<Vec<u8>, Box<dyn Error>> {

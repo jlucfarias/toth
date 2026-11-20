@@ -7,14 +7,16 @@ use epub_builder::{
 };
 use upon::Engine;
 use std::{
+  borrow::Cow,
   error::Error,
   fs,
 };
 
 use crate::{
   Book,
-  EpubConfig,
 };
+
+const DEFAULT_TITLEPAGE_TEMPLATE: &str = include_str!("../../templates/pages/titlepage.xhtml");
 
 pub(crate) struct Epub {
 }
@@ -68,16 +70,26 @@ impl Epub {
 
   fn add_content(builder: &mut EpubBuilder<ZipLibrary>, book: &Book) -> Result<(), Box<dyn Error>> {
     let mut engine = Engine::new();
-
-    let epub_configs = book.epub_configs().unwrap_or_else(|| EpubConfig::new());
+    let epub_configs = book.epub_configs();
 
     if !epub_configs.ignore_titlepage() {
-      engine.add_template("titlepage", include_str!("../../templates/pages/titlepage.xhtml"))?;
+      let template_content: Cow<'static, str> = match epub_configs.titlepage_template() {
+        Some(titlepage_template) => {
+          let template_path = book.root_path().join(titlepage_template);
+          let content = fs::read_to_string(template_path)?;
+
+          Cow::Owned(content)
+        },
+        None => Cow::Borrowed(DEFAULT_TITLEPAGE_TEMPLATE),
+      };
+
+      engine.add_template("titlepage", template_content)?;
 
       let titlepage_context = upon::value! {
         lang: book.language().first(),
         titlepage_name: "Titlepage",
         title: book.title(),
+        author: book.author().first(),
       };
       let result = engine.template("titlepage").render(&titlepage_context).to_string()?;
 

@@ -14,6 +14,7 @@ and this project adheres to Semantic Versioning ([SemVer]).
 - Import cover image from `.toml` file to epub.
 - Creating title page using template file.
 - Allow to ignore title page creation in epub export.
+- Allow to use a custom template for title page in epub export.
 
 ## [0.1.0] - 2026-10-16
 
