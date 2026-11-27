@@ -85,9 +85,10 @@ impl Epub {
 
       engine.add_template("titlepage", template_content)?;
 
+      let titlepage_name = epub_configs.titlepage_name().unwrap_or_else(|| "Titlepage");
       let titlepage_context = upon::value! {
         lang: book.language().first(),
-        titlepage_name: "Titlepage",
+        titlepage_name: titlepage_name,
         title: book.title(),
         author: book.author().first(),
       };
@@ -95,7 +96,7 @@ impl Epub {
 
       builder.add_content(
         EpubContent::new("text/titlepage.xhtml", result.as_bytes())
-          .title("Titlepage")
+          .title(titlepage_name)
           .reftype(ReferenceType::TitlePage)
       )?;
     }

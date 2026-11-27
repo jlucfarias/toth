@@ -9,6 +9,12 @@ e este projeto segue o versionamento semântico ([SemVer]).
 
 ### Adicionado
 
+- Permitir utilizar um nome personalizado para a página de título (`<title>`)
+
+## [0.2.0] - 2026-11-20
+
+### Adicionado
+
 - Exportando livro como epub e criando arquivo no sistema de arquivos.
 - Importando metadados do arquivo `.toml` para o epub.
 - Importando imagem de capa do arquivo `.toml` para o epub.

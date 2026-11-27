@@ -25,6 +25,7 @@ use crate::{
 pub struct EpubConfig {
   ignore_titlepage: bool,
   titlepage_template: Option<PathBuf>,
+  titlepage_name: Option<String>,
 }
 
 impl EpubConfig {
@@ -38,6 +39,10 @@ impl EpubConfig {
 
   pub fn titlepage_template(&self) -> Option<&Path> {
     self.titlepage_template.as_deref()
+  }
+
+  pub fn titlepage_name(&self) -> Option<&str> {
+    self.titlepage_name.as_deref()
   }
 }
 

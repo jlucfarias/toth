@@ -10,7 +10,7 @@ chrono = { version = "0.4.45", features = ["serde"] }
 infer = "0.22.0"
 serde = { version = "1.0.229", features = ["derive"] }
 toml = "1.1.6"
+upon = "0.11.0"
 
 # Epub export
 epub-builder = "0.8.3"
-upon = "0.11.0"
