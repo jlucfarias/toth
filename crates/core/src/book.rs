@@ -26,6 +26,7 @@ pub struct EpubConfig {
   ignore_titlepage: bool,
   titlepage_template: Option<PathBuf>,
   titlepage_name: Option<String>,
+  titlepage_path: Option<PathBuf>,
 }
 
 impl EpubConfig {
@@ -43,6 +44,10 @@ impl EpubConfig {
 
   pub fn titlepage_name(&self) -> Option<&str> {
     self.titlepage_name.as_deref()
+  }
+
+  pub fn titlepage_path(&self) -> Option<&Path> {
+    self.titlepage_path.as_deref()
   }
 }
 

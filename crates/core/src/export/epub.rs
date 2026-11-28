@@ -85,7 +85,7 @@ impl Epub {
 
       engine.add_template("titlepage", template_content)?;
 
-      let titlepage_name = epub_configs.titlepage_name().unwrap_or_else(|| "Titlepage");
+      let titlepage_name = epub_configs.titlepage_name().unwrap_or("Titlepage");
       let titlepage_context = upon::value! {
         lang: book.language().first(),
         titlepage_name: titlepage_name,
@@ -94,8 +94,10 @@ impl Epub {
       };
       let result = engine.template("titlepage").render(&titlepage_context).to_string()?;
 
+      let titlepage_path = epub_configs.titlepage_path().map(|p| p.to_string_lossy().into_owned()).unwrap_or("text/titlepage.xhtml".to_string());
+
       builder.add_content(
-        EpubContent::new("text/titlepage.xhtml", result.as_bytes())
+        EpubContent::new(titlepage_path, result.as_bytes())
           .title(titlepage_name)
           .reftype(ReferenceType::TitlePage)
       )?;
